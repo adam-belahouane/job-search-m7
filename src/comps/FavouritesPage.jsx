@@ -34,6 +34,7 @@ export const FavouritesPage = ({ favourites }) => {
   } else {
     return (
         <Container>
+            <Row className="justify-content-center" ><h1>Favourites</h1></Row>
         <Row>
           
           {favourites.map((company) => (
