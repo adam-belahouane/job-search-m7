@@ -23,10 +23,11 @@ export const MyNavBar = ({setSearch}) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link onClick={() => navigate(`/`)}>Home</Nav.Link>
+            <Nav.Link onClick={() => navigate(`/favourites`)}>Favourites</Nav.Link>
           </Nav>
-          <Form inline>
-            <FormControl onKeyUp={(e) => (setSValue(e.target.value))} type="text" placeholder="Search" className="d-flex mr-sm-2" />
-            <Button onClick={() => (setSearch(sValue))} variant="outline-success">Search</Button>
+          <Form >
+            <FormControl onKeyUp={(e) => (setSearch(e.target.value))} type="text" placeholder="Search" className="d-flex mr-sm-2" />
+            {/* <Button onClick={() => (setSearch(sValue))} variant="outline-success">Search</Button> */}
           </Form>
         </Navbar.Collapse>
       </Navbar>

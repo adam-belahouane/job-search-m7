@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export const SingleJobCard = ({ title, company, addToFav, removeFromFav, favourites}) => {
+export const CompanyCard = ({ company, addToFav, removeFromFav, favourites}) => {
     const[selected, setSelected] = useState(false)
 
     const navigate = useNavigate()
@@ -34,6 +34,7 @@ export const SingleJobCard = ({ title, company, addToFav, removeFromFav, favouri
         removeFromFav(i)
 
     }
+
     useEffect(() => {
         if(favourites.indexOf(company) !== -1){
             setSelected(true)
@@ -45,10 +46,9 @@ export const SingleJobCard = ({ title, company, addToFav, removeFromFav, favouri
       <Col  sm={6} className="my-2">
     <Card onc border="secondary">
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
         <Row> 
             <Col>
-            <Card.Text onClick={() => navigate(`/${company}`)} >{company}</Card.Text>
+            <Card.Title onClick={() => navigate(`/${company}`)} >{company}</Card.Title>
             </Col>
             <Col>
             {selected === false?
@@ -67,4 +67,4 @@ export const SingleJobCard = ({ title, company, addToFav, removeFromFav, favouri
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleJobCard)
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyCard)

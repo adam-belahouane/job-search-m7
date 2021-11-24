@@ -5,6 +5,7 @@ import { HomePage } from './comps/homepage';
 import { MyNavBar } from './comps/MyNavBar';
 import { CompanyPage } from './comps/CompanyPage';
 import { useState } from 'react';
+import  FavouritesPage  from './comps/FavouritesPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/"  element={<HomePage search={search} />} />
       <Route path="/:companyId"  element={<CompanyPage />} />
+      <Route path="/favourites" element={<FavouritesPage/>} />
     </Routes>
   </BrowserRouter>
 )

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 
-import { SingleJobCard } from "./SingleJobCard";
+
+import SingleJobCard from "./SingleJobCard";
+
+
 
 export const HomePage = ({search}) => {
   const [jobs, setJobs] = useState(null);

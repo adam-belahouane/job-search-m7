@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router";
-import { SingleJobCard } from "./SingleJobCard";
+import  SingleJobCard  from "./SingleJobCard";
 
 export const CompanyPage = () => {
   const params = useParams();
