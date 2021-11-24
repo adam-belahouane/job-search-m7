@@ -22,24 +22,24 @@ const mapDispatchToProps = (dispatch) => ({
 
 export const FavouritesPage = ({ favourites }) => {
   useEffect(() => {
-    console.log(favourites);
+    console.log(favourites.length);
   }, []);
 
-  if (favourites) {
+  if (favourites.length === 0) {
     return (
-      <Container>
+        <Container>
+        <h1>No Favourites Found</h1>
+      </Container>
+    );
+  } else {
+    return (
+        <Container>
         <Row>
           
           {favourites.map((company) => (
             <CompanyCard company={company} />
           ))}
         </Row>
-      </Container>
-    );
-  } else {
-    return (
-      <Container>
-        <h1>No Favourites Found</h1>
       </Container>
     );
   }
