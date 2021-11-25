@@ -1,19 +1,28 @@
-import { useState } from "react";
+
 import {
   Navbar,
   Nav,
   FormControl,
-  Form,
-  Button,
+  Form
 } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { setSearchAction } from "../actions";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+      jobs: state.jobs,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  setSearch: (value) => {
+    dispatch(setSearchAction(value))
+  }
+})
 
 
-
-
-
-export const MyNavBar = ({setSearch}) => {
-  const[sValue, setSValue] = useState("")
+export const MyNavBar = (setSearch) => {
   const navigate = useNavigate()
   return (
     <>
@@ -34,3 +43,6 @@ export const MyNavBar = ({setSearch}) => {
     </>
   );
 };
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyNavBar)

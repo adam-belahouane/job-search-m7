@@ -30,7 +30,7 @@ export const SingleJobCard = ({ title, company, addToFav, removeFromFav, favouri
 
     const handleRemoveClick = () => {
         setSelected(false)
-        let i = favourites.indexOf(company)
+        const i = favourites.indexOf(company)
         removeFromFav(i)
 
     }

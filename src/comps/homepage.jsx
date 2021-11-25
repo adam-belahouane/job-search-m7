@@ -1,44 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
-
+import { connect } from "react-redux";
+import { getJobsAction } from "../actions";
 
 import SingleJobCard from "./SingleJobCard";
 
-
-
-export const HomePage = ({search}) => {
-  const [jobs, setJobs] = useState(null);
-
-  
-
-  const fetchJobs = async () => {
-    try {
-      let response = await fetch(
-        `https://strive-jobs-api.herokuapp.com/jobs?search=${search}&limit=10`
-      );
-      if (response.ok) {
-        let data = await response.json();
-        console.log(Object.values(data.data));
-        setJobs(Object.values(data.data));
-        console.log(data.title);
-      }
-    } catch (error) {
-      console.log(error);
+const mapStateToProps = (state) => {
+    return {
+        jobs: state.jobs,
     }
-  };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getJobs: (search) => {
+        dispatch(getJobsAction(search))
+    }
+})
+
+export const HomePage = ({jobs, getJobs}) => {
 
   useEffect(() => {
-    fetchJobs();
-  }, [search]);
+      getJobs(jobs.search)
+  }, [jobs.search]);
 
-  if (jobs === null) {
+  if (jobs.isLoading === true) {
     return <h1>loading</h1>;
   } else {
       return (
           <Container>
           <Row>
 
-              {jobs.map((job) => (
+              {jobs.listOfJobs.map((job) => (
       <SingleJobCard title={job.title} company={job.company_name} />
     ))}
 
@@ -51,3 +43,5 @@ export const HomePage = ({search}) => {
       
   }
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
