@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export const MyNavBar = (setSearch) => {
+export const MyNavBar = ({setSearch}) => {
   const navigate = useNavigate()
   return (
     <>
@@ -36,7 +36,6 @@ export const MyNavBar = (setSearch) => {
           </Nav>
           <Form >
             <FormControl onKeyUp={(e) => (setSearch(e.target.value))} type="text" placeholder="Search" className="d-flex mr-sm-2" />
-            {/* <Button onClick={() => (setSearch(sValue))} variant="outline-success">Search</Button> */}
           </Form>
         </Navbar.Collapse>
       </Navbar>
