@@ -1,26 +1,18 @@
 import { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getJobsAction } from "../actions";
 
 import SingleJobCard from "./SingleJobCard";
 
-const mapStateToProps = (state) => {
-    return {
-        jobs: state.jobs,
-    }
-}
 
-const mapDispatchToProps = (dispatch) => ({
-    getJobs: (search) => {
-        dispatch(getJobsAction(search))
-    }
-})
+export const HomePage = () => {
 
-export const HomePage = ({jobs, getJobs}) => {
+    const jobs = useSelector(state => state.jobs)
+    const dispatch = useDispatch()
 
   useEffect(() => {
-      getJobs(jobs.search)
+      dispatch(getJobsAction(jobs.search))
   }, [jobs.search]);
 
   if (jobs.isLoading === true) {
@@ -44,4 +36,4 @@ export const HomePage = ({jobs, getJobs}) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default HomePage

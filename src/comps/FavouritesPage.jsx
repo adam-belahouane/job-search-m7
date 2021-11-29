@@ -1,26 +1,10 @@
 import { Container, Row } from "react-bootstrap";
 import  CompanyCard  from "./CompanyCard";
-import { connect } from "react-redux";
-import {
-  addToFavouritesAction,
-  removeFromFavouritesAction,
-} from "../actions/index.js";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-const mapStateToProps = (state) => ({
-  favourites: state.favourites.content,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addToFav: (companyToAdd) => {
-    dispatch(addToFavouritesAction(companyToAdd));
-  },
-  removeFromFav: (indexToRemove) => {
-    dispatch(removeFromFavouritesAction(indexToRemove));
-  },
-});
-
-export const FavouritesPage = ({ favourites }) => {
+export const FavouritesPage = () => {
+  const favourites = useSelector(state => state.favourites.content)
   useEffect(() => {
     console.log(favourites.length);
   }, []);
@@ -46,4 +30,4 @@ export const FavouritesPage = ({ favourites }) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavouritesPage);
+export default FavouritesPage;

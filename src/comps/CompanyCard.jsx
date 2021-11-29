@@ -1,37 +1,26 @@
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { addToFavouritesAction, removeFromFavouritesAction } from "../actions/index.js";
 
-const mapStateToProps = (state) => ({
-    favourites: state.favourites.content
-})
 
-const mapDispatchToProps = dispatch => ({
-    addToFav: (companyToAdd) => {
-        dispatch(addToFavouritesAction(companyToAdd))
-    },
-    removeFromFav: (indexToRemove) => {
-        dispatch(removeFromFavouritesAction(indexToRemove))
-    }
-})
-
-
-export const CompanyCard = ({ company, addToFav, removeFromFav, favourites}) => {
+export const CompanyCard = ({ company }) => {
     const[selected, setSelected] = useState(false)
+    const favourites = useSelector(state => state.favourites.content)
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
 
     const handleAddClick = () => {
         setSelected(true)
-        addToFav(company)
+        dispatch(addToFavouritesAction(company))
     }
 
     const handleRemoveClick = () => {
         setSelected(false)
         let i = favourites.indexOf(company)
-        removeFromFav(i)
+        dispatch(removeFromFavouritesAction(i))
 
     }
 
@@ -67,4 +56,4 @@ export const CompanyCard = ({ company, addToFav, removeFromFav, favourites}) => 
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyCard)
+export default CompanyCard

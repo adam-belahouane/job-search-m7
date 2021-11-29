@@ -7,23 +7,14 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { setSearchAction } from "../actions";
-import { connect } from "react-redux";
-
-const mapStateToProps = (state) => {
-  return {
-      jobs: state.jobs,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  setSearch: (value) => {
-    dispatch(setSearchAction(value))
-  }
-})
+import { useSelector, useDispatch } from "react-redux";
 
 
-export const MyNavBar = ({setSearch}) => {
+
+export const MyNavBar = () => {
   const navigate = useNavigate()
+  const jobs = useSelector(state => state.jobs)
+  const dispatch = useDispatch()
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -35,7 +26,7 @@ export const MyNavBar = ({setSearch}) => {
             <Nav.Link onClick={() => navigate(`/favourites`)}>Favourites</Nav.Link>
           </Nav>
           <Form >
-            <FormControl onKeyUp={(e) => (setSearch(e.target.value))} type="text" placeholder="Search" className="d-flex mr-sm-2" />
+            <FormControl onKeyUp={(e) => (dispatch(setSearchAction(e.target.value)))} type="text" placeholder="Search" className="d-flex mr-sm-2" />
           </Form>
         </Navbar.Collapse>
       </Navbar>
@@ -44,4 +35,4 @@ export const MyNavBar = ({setSearch}) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyNavBar)
+export default MyNavBar
